@@ -1,0 +1,29 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Scrollbar for Webkit-based browsers */
+::-webkit-scrollbar {
+  width: 12px;  /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;  /* Background color of the track (scrollbar container) */
+  border-radius: 10px;   /* Optionally, round the track corners */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #8E05C2;  /* Color of the scroll handle (thumb) */
+  border-radius: 10px;  /* Round the thumb corners */
+  border: 3px solid #3E065F;  /* Add border to the thumb to match your color scheme */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #700B97;  /* Darker color when hovering over the scrollbar */
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #000000;  /* Color when the scrollbar thumb is being clicked/dragged */
+}
