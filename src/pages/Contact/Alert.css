@@ -1,0 +1,41 @@
+.alert {
+    padding: 15px;
+    margin: 20px auto;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 300px;
+  }
+  
+  .alert.dark {
+    background-color: #333;
+    color: #fff;
+    border-color: #222;
+  }
+  
+  .alert.success {
+    background-color: #23105b; /* Vert pour le succès */
+  }
+  
+  .alert.error {
+    background-color: #f44336; /* Rouge pour l'erreur */
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .close-btn:hover {
+    color: #ccc;
+  }

@@ -21,7 +21,7 @@ export const About = () => {
           className="flex flex-col gap-y-4 w-full lg:w-[40vw]">
           <h1 className="text-4xl lg:text-6xl">About Me</h1>
           <p className="text-lg lg:text-2xl">
-            Hi I’m Walid Cadi, a full-stack web developer with a strong focus on
+            Hi I’m Soufiane el hatimi , a full-stack web developer with a strong focus on
             building web applications. I have expertise in both front-end and
             back-end technologies, allowing me to develop seamless user
             experiences from design to deployment.

@@ -1,12 +1,16 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react"; // Ajoutez useState
 import emailjs from "@emailjs/browser";
 import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
 import { fadeIn } from "../../variants";
 import { motion } from "framer-motion";
+import Alert from './Alert'; // Assurez-vous que le chemin est correct
 
 export const Contact = () => {
   const form = useRef();
+  const [showAlert, setShowAlert] = useState(false); // État pour afficher l'alerte
+  const [alertMessage, setAlertMessage] = useState(""); // État pour le message de l'alerte
+  const [isSuccess, setIsSuccess] = useState(false); // État pour déterminer si c'est un succès ou une erreur
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -17,82 +21,23 @@ export const Contact = () => {
       })
       .then(
         () => {
-          alert("SUCCESS!");
+          setAlertMessage("SUCCESS! Your message has been sent."); // Message de succès
+          setIsSuccess(true); // Définir le style de succès
+          setShowAlert(true); // Afficher l'alerte
         },
         (error) => {
-          alert("FAILED...", error.text);
+          setAlertMessage(`FAILED... ${error.text}`); // Message d'erreur
+          setIsSuccess(false); // Définir le style d'erreur
+          setShowAlert(true); // Afficher l'alerte
         }
       );
   };
+
+  const handleCloseAlert = () => {
+    setShowAlert(false); // Fermer l'alerte
+  };
+
   return (
-    // <div
-    //   id="contact"
-    //   className="flex flex-col items-center gap-y-5 text-white p-10">
-    //   <h1 className="text-4xl font-bold">Contact Me</h1>
-    //   <div className="flex items-start gap-x-4">
-    //     <form
-    //       className="flex flex-col gap-2 p-6 bg-transparent border-2 border-white rounded-xl"
-    //       ref={form}
-    //       onSubmit={sendEmail}>
-    //       <input
-    //         className="bg-transparent border-2 border-white rounded-lg p-5 focus:outline-none"
-    //         required
-    //         type="text"
-    //         name="name"
-    //         placeholder="Name..."
-    //       />
-    //       <div className="flex gap-3 items-center">
-    //         <input
-    //           className="bg-transparent border-2 border-white rounded-lg p-5 focus:outline-none"
-    //           required
-    //           type="email"
-    //           name="user_email"
-    //           placeholder="Email..."
-    //         />
-    //         <input
-    //           className="bg-transparent border-2 border-white rounded-lg p-5 focus:outline-none"
-    //           required
-    //           type="text"
-    //           name="user_phone"
-    //           placeholder="Phone..."
-    //         />
-    //       </div>
-    //       <textarea
-    //         className="bg-transparent border-2 border-white rounded-lg p-5 focus:outline-none"
-    //         required
-    //         name="message"
-    //         placeholder="Message"
-    //         rows={6}
-    //       />
-    //       <button
-    //         type="submit"
-    //         value="Send"
-    //         class="mb-6 inline-block w-full border-2 border-white rounded-lg bg-transparent px-6 py-2.5 font-medium uppercase leading-normal text-white hover:shadow-md hover:bg-[#8E05C2]">
-    //         Send
-    //       </button>
-    //     </form>
-    //     <div className="flex flex-col gap-y-5">
-    //       <a
-    //         target="_blank"
-    //         href="https://www.linkedin.com/in/walid-cadi-532b38236/"
-    //         className="overflow-hidden flex items-center justify-center bg-transparent border-2 border-white rounded-full w-[100px] h-[100px] ">
-    //         <FaLinkedinIn className="text-6xl text-white hover:scale-110 duration-300" />
-    //       </a>
-    //       <a
-    //         target="_blank"
-    //         href="https://www.instagram.com/ca_waliiid/"
-    //         className="overflow-hidden flex items-center justify-center bg-transparent border-2 border-white rounded-full w-[100px] h-[100px] ">
-    //         <FaInstagram className="text-6xl text-white hover:scale-110 duration-300" />
-    //       </a>
-    //       <a
-    //         target="_blank"
-    //         href=""
-    //         className="overflow-hidden flex items-center justify-center bg-transparent border-2 border-white rounded-full w-[100px] h-[100px] ">
-    //         <SiGmail className="text-6xl text-white hover:scale-110 duration-300" />
-    //       </a>
-    //     </div>
-    //   </div>
-    // </div>
     <div
       id="contact"
       className="mt-[15vh] flex flex-col items-center gap-y-5 text-white p-5 lg:p-10">
@@ -181,6 +126,15 @@ export const Contact = () => {
           </a>
         </motion.div>
       </div>
+
+      {/* Afficher l'alerte */}
+      {showAlert && (
+        <Alert
+          message={alertMessage}
+          onClose={handleCloseAlert}
+          isSuccess={isSuccess} // Passer le statut de succès/échec
+        />
+      )}
     </div>
   );
 };
